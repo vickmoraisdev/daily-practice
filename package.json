@@ -1,9 +1,16 @@
 {
 
-  "scripts":{
+  "scripts": {
+
     "server": "json-server server.json --port=1717"
+
   },
+
   "dependencies": {
-    "json-server": "^1.0.0-beta.15"
+
+    "json-server": "^1.0.0-alpha.17" 
+
   }
+
 }
+
