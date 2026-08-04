@@ -1,5 +1,7 @@
 {
-    "teste": {
-        "name": "Instalando o json-server"
-    }
+    "products": [
+        { "id": 1, "name": "Mouse", "price": 150.90},
+        { "id": 2, "name": "Teclado", "price": 90},
+        { "id": 3, "name": "Monitor", "price": 500}
+    ]
 }
