@@ -1,7 +1,29 @@
 {
-    "products": [
-        { "id": 1, "name": "Mouse", "price": 150.90},
-        { "id": 2, "name": "Teclado", "price": 90},
-        { "id": 3, "name": "Monitor", "price": 500}
-    ]
+  "products": [
+    {
+      "id": 1,
+      "name": "Mouse",
+      "price": 150.9
+    },
+    {
+      "id": 2,
+      "name": "Teclado",
+      "price": 90
+    },
+    {
+      "id": 3,
+      "name": "Monitor",
+      "price": 500
+    },
+    {
+      "id": "1786022736879",
+      "name": "Lápis de celular",
+      "price": "60"
+    },
+    {
+      "id": "1786022814262",
+      "name": "Microfone",
+      "price": "82"
+    }
+  ]
 }
