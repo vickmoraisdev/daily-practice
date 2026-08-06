@@ -8,6 +8,6 @@ com requisições assíncronas e como utilizar o método .then
 para tratar os dados retornados pela API.
 */
 
-// Local é http e da internet é https
-const response = fetch('http://localhost:1717/products')
-console.log(response)
+fetch('http://localhost:1717/products').then((response) => {
+    console.log(response) // apareceu (status: 200, o 200 é de sucesso, o 404 é de erro.)
+})
