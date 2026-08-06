@@ -8,6 +8,7 @@ com requisições assíncronas e como utilizar o método .then
 para tratar os dados retornados pela API.
 */
 
-fetch('http://localhost:1717/products').then((response) => {
-    console.log(response) // apareceu (status: 200, o 200 é de sucesso, o 404 é de erro.)
-})
+fetch('http://localhost:1717/products').then((response) => response.json()) 
+//.json mostra o conteúdo, por exemplo, os produtos que ta no server.json 
+
+.then((data) => console.log(data)) // Aqui, estou exibindo os produtos no console.log()
