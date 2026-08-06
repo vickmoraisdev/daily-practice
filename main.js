@@ -1,8 +1,13 @@
-/*
-Criando uma API de exemplo - Nesta aula, criamos dados 
-para simular uma API, definindo recursos como produtos. 
-Utilizamos o json-server para simular a API e testamos 
-acessando os produtos via navegador, fazendo requisições 
-do tipo GET. Demonstrando como filtrar produtos por ID 
-e como simular o comportamento de uma API.
+/*Utilizando o fetch
+Nesta aula, vimos como consumir uma API 
+utilizando JavaScript e a função fetch. 
+Aprendemos como definir o endereço da API,
+lidar com promises, obter informações da requisição e 
+converter a resposta para JSON. Vimos a importância de lidar 
+com requisições assíncronas e como utilizar o método .then 
+para tratar os dados retornados pela API.
 */
+
+// Local é http e da internet é https
+const response = fetch('http://localhost:1717/products')
+console.log(response)
