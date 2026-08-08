@@ -1,64 +1,87 @@
-/*Exercício 3 — Cadastro de usuários
-Endpoint:
+/*Exercício 4 — Cadastro + busca
+Você vai criar:
 
-POST /users
+Formulário
+Nome do produto
+Preço
 
-Formulário:
+E continuará fazendo:
 
-Nome
-Email
-Idade
+POST /products
 
-Ao enviar:
+Só que depois do cadastro, faça um GET:
 
-{
-    id: ...,
-    name: ...,
-    email: ...,
-    age: ...
-}
-Mas agora tem uma regra:
+GET /products
 
-Se algum campo estiver vazio, não faça o POST.
+E mostre na página todos os produtos cadastrados.
 
-Mostre:
+Por exemplo:
 
-Preencha todos os campos.
+Produtos cadastrados:
+
+Notebook - R$3500
+Mouse - R$80
+Teclado - R$150
+
+Aqui você vai juntar:
+
+POST
+ ↓
+GET
+ ↓
+JSON
+ ↓
+forEach()
+ ↓
+DOM
+
 */
 
-const userName = document.getElementById('name')
-const userEmail = document.getElementById('email')
-const userAge = document.getElementById('age')
+const nameProduct = document.getElementById('name')
+const priceProduct = document.getElementById('price')
 const form = document.querySelector('form')
-const register = document.getElementById('register')
+const item = document.getElementById('item')
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault()
 
-    if (!validation(userName, userEmail, userAge)) {
+    if (!verification(nameProduct, priceProduct)) {
         return
     }
 
-    await fetch('http://localhost:1717/users', {
-        method: "POST",
+    await fetch('http://localhost:1717/products', {
+        method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
             id: new Date().getTime(),
-            name: userName.value,
-            email: userEmail.value,
-            age: Number(userAge.value)
+            name: nameProduct.value,
+            price: Number(priceProduct.value)
         })
     })
 
-    form.reset()
+    showProducts()
 })
 
-function validation(name, email, age) {
-    if (name.value.trim() === "" || email.value.trim() === "" || age.value.trim() === "") {
-        window.alert('Preencha todos os campos.')
+function verification(name, price) {
+    if (name.value.trim() === "" || price.value.trim() === "") {
+        alert('Preencha todos os campos!')
         return false
     }
     return true
+}
+
+async function showProducts() {
+    const response = await fetch('http://localhost:1717/products')
+    const data = await response.json()
+    
+    item.textContent = 'Produtos cadastrados:'
+    data.forEach((product) => {
+        item.innerHTML += `
+        <p>${product.name} - R$${product.price}</p>
+        `
+    })
+
+    form.reset()
 }

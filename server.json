@@ -1,22 +1,19 @@
 {
-  "users": [
+  "products": [
     {
-      "id": 1786197172714,
-      "name": "Vitória",
-      "email": "vitoriamoraisfaria@gmail.com",
-      "age": 20
+      "id": 1786198246875,
+      "name": "Microfone",
+      "price": 82
     },
     {
-      "id": 1786197554096,
-      "name": "Eliel",
-      "email": "eliel@gmail.com",
-      "age": 10
+      "id": 1786199593251,
+      "name": "Pirulito",
+      "price": 1.99
     },
     {
-      "id": 1786197655220,
-      "name": "Daniel",
-      "email": "danielmorais@gmail.com",
-      "age": 17
+      "id": 1786199786593,
+      "name": "Candy POP",
+      "price": 10.77
     }
   ]
 }
