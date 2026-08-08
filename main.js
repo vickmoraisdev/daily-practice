@@ -1,47 +1,51 @@
-/*Exercício 4 — Cadastro + busca
-Você vai criar:
+/*Exercício 5 — Cadastrar e procurar
 
-Formulário
-Nome do produto
+Usando:
+
+/products
+
+Crie:
+
+Formulário de cadastro
+Nome
 Preço
+[ Cadastrar ]
 
-E continuará fazendo:
+E outro formulário:
 
-POST /products
+ID do produto
+[ Buscar ]
 
-Só que depois do cadastro, faça um GET:
+Ao clicar em buscar:
 
-GET /products
+Faça um GET.
+Encontre o produto correspondente.
+Mostre:
+Produto encontrado:
 
-E mostre na página todos os produtos cadastrados.
+Nome: Mouse
+Preço: R$80
 
-Por exemplo:
+Aqui você vai poder usar aquela coisa que acabou de aprender:
 
-Produtos cadastrados:
+data[0]
 
-Notebook - R$3500
-Mouse - R$80
-Teclado - R$150
+porque:
 
-Aqui você vai juntar:
+/products?id=2
 
-POST
- ↓
-GET
- ↓
-JSON
- ↓
-forEach()
- ↓
-DOM
-
+retorna um array.
 */
 
+// Pegando os itens do HTML
 const nameProduct = document.getElementById('name')
 const priceProduct = document.getElementById('price')
 const form = document.querySelector('form')
+const formFetch = document.getElementById('fetch')
 const item = document.getElementById('item')
+const idProduct = document.getElementById('id')
 
+// 
 form.addEventListener('submit', async (event) => {
     event.preventDefault()
 
@@ -61,8 +65,10 @@ form.addEventListener('submit', async (event) => {
         })
     })
 
-    showProducts()
+    form.reset()
 })
+
+
 
 function verification(name, price) {
     if (name.value.trim() === "" || price.value.trim() === "") {
@@ -72,16 +78,32 @@ function verification(name, price) {
     return true
 }
 
-async function showProducts() {
+formFetch.addEventListener('submit', async (event) => {
+    event.preventDefault()
+   
     const response = await fetch('http://localhost:1717/products')
     const data = await response.json()
-    
-    item.textContent = 'Produtos cadastrados:'
-    data.forEach((product) => {
-        item.innerHTML += `
-        <p>${product.name} - R$${product.price}</p>
-        `
-    })
+    const id = Number(idProduct.value)
+    const productFind = data.find((product) => product.id === id)
 
-    form.reset()
+    if(!validationFetch(id)){
+        return
+    }
+
+    showProduct(productFind)
+    formFetch.reset()
+})
+
+function validationFetch(id) {
+    if (id === 0) {
+        window.alert('Digite um ID válido para buscar.')
+        return false
+    }
+    return true
+}
+
+function showProduct(product) {
+    item.innerHTML = '<strong>Produto encontrado:</strong>'
+    item.innerHTML += `<p>Nome do produto: ${product.name}</p>`
+    item.innerHTML += `<p>Preço do produto: R$${product.price}</p>`
 }
