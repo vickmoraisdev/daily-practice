@@ -1,18 +1,28 @@
 {
   "products": [
     {
-      "id": 1786198246875,
-      "name": "Microfone",
-      "price": 82
+      "id": 1786214259848,
+      "name": "Celular",
+      "price": 1200
     },
     {
-      "id": 1786199593251,
-      "name": "Pirulito",
-      "price": 1.99
+      "id": 1786214344510,
+      "name": "Máquina",
+      "price": 2300
     },
     {
-      "id": 1786199786593,
-      "name": "Candy POP",
+      "id": 1786214366879,
+      "name": "Jóia",
+      "price": 1200
+    },
+    {
+      "id": 1786214396374,
+      "name": "Celular",
+      "price": 120
+    },
+    {
+      "id": 1786214504519,
+      "name": "Máquina",
       "price": 10.77
     }
   ]

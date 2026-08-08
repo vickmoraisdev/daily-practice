@@ -1,55 +1,43 @@
-/*Exercício 5 — Cadastrar e procurar
+"use strict"
 
-Usando:
+/*Exercício 6 — Produtos caros
+
+Agora não precisa criar nenhum formulário.
+
+Faça um GET em:
 
 /products
 
-Crie:
+Depois use:
 
-Formulário de cadastro
-Nome
-Preço
-[ Cadastrar ]
+filter()
 
-E outro formulário:
+para mostrar apenas produtos acima de R$500.
 
-ID do produto
-[ Buscar ]
+Depois use:
 
-Ao clicar em buscar:
+map()
 
-Faça um GET.
-Encontre o produto correspondente.
-Mostre:
-Produto encontrado:
+para mostrar somente os nomes.
 
-Nome: Mouse
-Preço: R$80
+Exemplo:
 
-Aqui você vai poder usar aquela coisa que acabou de aprender:
+Notebook
+Monitor
+Celular
 
-data[0]
-
-porque:
-
-/products?id=2
-
-retorna um array.
+Aqui você está juntando API + métodos de array.
 */
 
-// Pegando os itens do HTML
 const nameProduct = document.getElementById('name')
 const priceProduct = document.getElementById('price')
 const form = document.querySelector('form')
-const formFetch = document.getElementById('fetch')
-const item = document.getElementById('item')
-const idProduct = document.getElementById('id')
+const item = document.querySelector('#item')
 
-// 
 form.addEventListener('submit', async (event) => {
     event.preventDefault()
 
-    if (!verification(nameProduct, priceProduct)) {
+    if (!validation(nameProduct, priceProduct)) {
         return
     }
 
@@ -66,44 +54,42 @@ form.addEventListener('submit', async (event) => {
     })
 
     form.reset()
+    fetchItens()
 })
 
-
-
-function verification(name, price) {
+function validation(name, price) {
     if (name.value.trim() === "" || price.value.trim() === "") {
-        alert('Preencha todos os campos!')
+        window.alert('Preencha os campos.')
         return false
     }
     return true
 }
 
-formFetch.addEventListener('submit', async (event) => {
-    event.preventDefault()
-   
+async function fetchItens() {
     const response = await fetch('http://localhost:1717/products')
     const data = await response.json()
-    const id = Number(idProduct.value)
-    const productFind = data.find((product) => product.id === id)
+    console.log(data)
 
-    if(!validationFetch(id)){
-        return
-    }
-
-    showProduct(productFind)
-    formFetch.reset()
-})
-
-function validationFetch(id) {
-    if (id === 0) {
-        window.alert('Digite um ID válido para buscar.')
-        return false
-    }
-    return true
+    showItens(data)
 }
 
-function showProduct(product) {
-    item.innerHTML = '<strong>Produto encontrado:</strong>'
-    item.innerHTML += `<p>Nome do produto: ${product.name}</p>`
-    item.innerHTML += `<p>Preço do produto: R$${product.price}</p>`
+function showItens(itemFind) {
+    const expensiveItens = itemFind.filter((product) => product.price > 500)
+    console.log(expensiveItens)
+    
+    if (expensiveItens.length === 0) {
+        item.innerHTML = 'Nenhum produto caro registrado.'
+        setTimeout(() => {
+            item.innerHTML = ''
+        }, 3000);
+        return
+    } else{
+        item.innerHTML = '<strong>Produtos acima de 500 reais:</strong>'
+
+        expensiveItens.forEach((product) => {
+            item.innerHTML += `<p>Produto: ${product.name}</p>`
+            item.innerHTML += `<p>Preço: R$${product.price}</p>`
+            item.innerHTML += '<div>---------------------</div>'
+        });
+    }
 }
