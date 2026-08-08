@@ -1,46 +1,64 @@
-const movieTitle = document.getElementById('title')
-const movieDirector = document.getElementById('director')
-const movieGenre = document.getElementById('genre')
+/*Exercício 3 — Cadastro de usuários
+Endpoint:
+
+POST /users
+
+Formulário:
+
+Nome
+Email
+Idade
+
+Ao enviar:
+
+{
+    id: ...,
+    name: ...,
+    email: ...,
+    age: ...
+}
+Mas agora tem uma regra:
+
+Se algum campo estiver vazio, não faça o POST.
+
+Mostre:
+
+Preencha todos os campos.
+*/
+
+const userName = document.getElementById('name')
+const userEmail = document.getElementById('email')
+const userAge = document.getElementById('age')
 const form = document.querySelector('form')
 const register = document.getElementById('register')
 
-form.addEventListener('submit', async(event) => {
+form.addEventListener('submit', async (event) => {
     event.preventDefault()
 
-    if(!verification(movieTitle, movieDirector, movieGenre)){
+    if (!validation(userName, userEmail, userAge)) {
         return
     }
 
-    await fetch('http://localhost:1717/movies', {
-        method: 'POST',
+    await fetch('http://localhost:1717/users', {
+        method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
             id: new Date().getTime(),
-            title: movieTitle.value,
-            director: movieDirector.value,
-            genre: movieGenre.value
+            name: userName.value,
+            email: userEmail.value,
+            age: Number(userAge.value)
         })
     })
 
-    successRegister()
-
+    form.reset()
 })
 
-function verification(title, director, genre) {
-    if (title.value.trim() === "" || director.value.trim() === "" || genre.value.trim() === "") {
+function validation(name, email, age) {
+    if (name.value.trim() === "" || email.value.trim() === "" || age.value.trim() === "") {
         window.alert('Preencha todos os campos.')
         return false
     }
     return true
-}
-
-function successRegister(){
-    register.textContent = 'Filme cadastrado com sucesso!'
-    form.reset()
-
-    setTimeout(() => {
-        register.textContent = ''
-    }, 2000);
 }
